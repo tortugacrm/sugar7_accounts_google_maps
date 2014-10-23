@@ -19,3 +19,12 @@ See on the map:
 
 Add the dashlet 'Accounts Gmaps' to the home page with the maximum width (3 columns).
 
+Installation:
+1) log in as the admin
+2) Module loader – install the module
+3) log out
+4a) open the javascript console: clear the cache, type App.cache.cutAll(true) 
+Or 
+4b) open a google chrome incognito window
+5) log in as Jim
+6) add the dashlet to the home page
