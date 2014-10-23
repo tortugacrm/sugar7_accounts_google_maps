@@ -40,9 +40,9 @@ $manifest = array (
 		  'icon' => '',
 		  'is_uninstallable' => true,
 		  'name' => 'Accounts Gmaps Dashlet',
-		  'published_date' => '2014-08-13 08:00',
+		  'published_date' => '2014-10-23 08:00',
 		  'type' => 'module',
-		  'version' => '1.0.0.19',
+		  'version' => '1.0.0.24',
 		  'remove_tables' => false,
 		  );  
 		  

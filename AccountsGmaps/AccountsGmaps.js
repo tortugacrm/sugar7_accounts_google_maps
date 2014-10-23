@@ -31,6 +31,13 @@
         this.my_data = '';
     },
     
+    _render: function() {
+        if (this.my_data == '') {
+            return;
+        }
+        this._super('_render');
+    },
+    
     loadData: function(options) {
         var limit;
         if (_.isUndefined(this.model)) {
@@ -54,27 +61,27 @@
 				args = 'AccountsGmaps/map1?assigned_user_id='+app.user.attributes.id+'&limit='+limit;
 				break;
 		}
-		console.log('mapoptions='+mapoptions+', args='+args);
-		var self = this;
+		console.log('mapoptions='+mapoptions+', args='+args+', limit='+limit+', myposition='+myposition);
+		var myself = this;
 		
-		console.log('limit='+limit);
-		console.log('myposition='+myposition);
-
         app.api.call('GET', app.api.buildURL(args), null, 
 		{ 
             success: function (data) {  
                 if (this.disposed) {
                     return;
                 }
-				self.my_data = JSON.stringify(data);
-				self.myposition = myposition;
-				self.render();
+                console.log('# API call map success');
+				myself.my_data = JSON.stringify(data);
+                myself.my_data = myself.my_data.replace(/'/g, "\\'");
+				myself.myposition = myposition;
+				console.log('# Now render!');
+				myself.render();
 				return;
 
 			} // success 1
         }
         );
 
-    }, // Load data
+    } // Load data
     
 })
