@@ -1,6 +1,7 @@
 'Accounts Gmaps Dashlet'
 Copyright 2014 SugarCRM Inc.  All rights reserved.
 Authors: Olivier Nepomiachty, Andrew Gittins, Andy Yeates & Abhijeet Vardhan.
+Licensed under the Apache License, Version 2.0
 
 Icons by Nicolas Mollet
 http://mapicons.nicolasmollet.com/

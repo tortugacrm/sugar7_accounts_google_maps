@@ -2,20 +2,22 @@
 /*
  *  This file is part of 'Accounts Gmaps Dashlet'.
  *
- *  'Accounts Gmaps Dashlet' is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation.
- *
- *  'Accounts Gmaps Dashlet' is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with 'Accounts Gmaps Dashlet'.  If not, see http://www.gnu.org/licenses/gpl.html.
- *
- * Copyright 2014 SugarCRM Inc.  All rights reserved.
+ * Copyright [2015/1/26] [Olivier Nepomiachty]
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
  * Authors: Olivier Nepomiachty, Andrew Gittins, Andy Yeates & Abhijeet Vardhan.
+ * 
  */
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  
@@ -68,7 +70,8 @@ class AccountsGmapsApi extends SugarApi
                 'shortHelp' => 'Gmaps: current user\'s today meetings related to accounts',
                 //long help to be displayed in the help documentation
                 'longHelp' => '',
-            ),        
+            ),     
+
          );
     }
  
@@ -76,6 +79,9 @@ class AccountsGmapsApi extends SugarApi
      * Method to be used for my MyEndpoint/GetExample endpoint
      */
 
+	// #######################################
+	// ############### GetMap1 ###############
+	// #######################################
     public function GetMap1($api, $args)
     {
 		if (!isset($args['assigned_user_id'])) { 
@@ -93,8 +99,8 @@ class AccountsGmapsApi extends SugarApi
 		$assigned_user_id=$ac->db->quote($args['assigned_user_id']);
 		$sql = "select ac.id,ac.name, ac.billing_address_street, ac.billing_address_postalcode, ac.billing_address_city, ac.billing_address_country, ac.industry, acstm.latitude_c,acstm.longitude_c from accounts ac
 left join accounts_cstm acstm on ac.id = acstm.id_c
-where (acstm.id_c is not null) and assigned_user_id='$assigned_user_id'
-and deleted='0' $limit";
+where /*(acstm.id_c is not null) and*/ assigned_user_id='$assigned_user_id'
+and deleted='0' group by ac.id  $limit";
 		$GLOBALS['log']->debug("##sql: $sql");
 		$result = $ac->db->query($sql);
 		$return = array();
@@ -118,6 +124,9 @@ and deleted='0' $limit";
 		return($return);
     }
 
+	// #######################################
+	// ############### GetMap2 ###############
+	// #######################################
     public function GetMap2($api, $args)
     {
 		if (!isset($args['assigned_user_id'])) { 
@@ -198,6 +207,9 @@ and op.deleted='0' and acop.deleted='0' group by op.id "; // $limit
 		return($return);
     }
     
+	// #######################################
+	// ############### GetMap3 ###############
+	// #######################################
     private function filt($s) {
 		return($s == null) ? '' : $s;
 	}
@@ -272,6 +284,6 @@ group by m.id";
 		}
 		return($return);
     }
-     
+    
 }
 ?>

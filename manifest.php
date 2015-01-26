@@ -2,20 +2,22 @@
 /*
  *  This file is part of 'Accounts Gmaps Dashlet'.
  *
- *  'Accounts Gmaps Dashlet' is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation.
- *
- *  'Accounts Gmaps Dashlet' is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with 'Accounts Gmaps Dashlet'.  If not, see http://www.gnu.org/licenses/gpl.html.
- *
- * Copyright 2014 SugarCRM Inc.  All rights reserved.
+ * Copyright [2015/1/26] [Olivier Nepomiachty]
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
  * Authors: Olivier Nepomiachty, Andrew Gittins, Andy Yeates & Abhijeet Vardhan.
+ * 
  */
 $manifest = array (
 
@@ -40,9 +42,9 @@ $manifest = array (
 		  'icon' => '',
 		  'is_uninstallable' => true,
 		  'name' => 'Accounts Gmaps Dashlet',
-		  'published_date' => '2014-10-23 08:00',
+		  'published_date' => '2015-01-26 08:00',
 		  'type' => 'module',
-		  'version' => '1.0.0.24',
+		  'version' => '1.0.0.27',
 		  'remove_tables' => false,
 		  );  
 		  
@@ -63,16 +65,6 @@ $installdefs = array (
       'from' => '<basepath>/modules/Accounts/AccountsGmapsHook.php',
       'to' => 'custom/modules/Accounts/AccountsGmapsHook.php',
     ),
-    /*
-    array (
-      'from' => '<basepath>/Extension/modules/Accounts/Ext/Vardefs/sugarfield_latitude_c.php',
-      'to' => 'custom/Extension/modules/Accounts/Ext/Vardefs/sugarfield_latitude_c.php',
-    ),
-    array (
-      'from' => '<basepath>/Extension/modules/Accounts/Ext/Vardefs/sugarfield_longitude_c.php',
-      'to' => 'custom/Extension/modules/Accounts/Ext/Vardefs/sugarfield_longitude_c.php',
-    ),
-    */    
    ),   
 
     'logic_hooks' => array(
