@@ -53,4 +53,4 @@ Creative Commons 3.0 BY-SA (http://creativecommons.org/licenses/by-sa/3.0/)
 
 5) Change history
 - 1.2.2 7/31/2015
-Bug fix. Accounts & Contacts shared the same classname for the logic hooks, with trigers an error when converting a lead.
+Bug fixed. Accounts & Contacts shared the same classname for the logic hooks, which trigers an error when converting a lead.
