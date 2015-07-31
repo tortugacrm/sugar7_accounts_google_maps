@@ -52,5 +52,8 @@ Creative Commons 3.0 BY-SA (http://creativecommons.org/licenses/by-sa/3.0/)
 - add the dashlet to the home page
 
 5) Change history
+- 1.2.3 7/31/2015
+API method GET AccountsGmaps/GetContact was missing in the previous packages.
+
 - 1.2.2 7/31/2015
 Bug fixed. Accounts & Contacts shared the same classname for the logic hooks, which trigers an error when converting a lead.

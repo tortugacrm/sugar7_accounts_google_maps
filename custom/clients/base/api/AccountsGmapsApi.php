@@ -84,7 +84,22 @@ class AccountsGmapsApi extends SugarApi
                 //long help to be displayed in the help documentation
                 'longHelp' => '',
             ),     
-               
+
+             'GetContactEndpoint' => array(
+                //request type
+                'reqType' => 'GET',
+                //endpoint path
+                'path' => array('AccountsGmaps', 'GetContact'),
+                //endpoint variables
+                'pathVars' => array('', '', 'data'),
+                //method to call
+                'method' => 'GetContact',
+                //short help string to be displayed in the help documentation
+                'shortHelp' => 'Gmaps: contact record view, get 1 contact',
+                //long help to be displayed in the help documentation
+                'longHelp' => '',
+            ),  
+
          );
     }
  
@@ -341,6 +356,47 @@ group by m.id";
 			$r['_module'] = 'Accounts';
 			array_push($return['records'], $r);
 		}
+		return($return);
+    }
+
+	// #######################################
+	// ############### GetContact ###############
+	// #######################################
+    public function GetContact($api, $args)
+    // Same behavior as GetMap1 but return a single account in a array
+    {
+		if (!isset($args['contactid'])) { 
+			return '[]'; 
+			exit; 
+		}
+		$ac = new Contact();
+		$contactid=$ac->db->quote($args['contactid']);
+		$sql = "select ac.id, ac.first_name, ac.last_name, ac.primary_address_street, ac.primary_address_postalcode, ac.primary_address_city, ac.primary_address_country, /*ac.industry,*/ acstm.latitude_c,acstm.longitude_c from contacts ac
+left join contacts_cstm acstm on ac.id = acstm.id_c
+where /*(acstm.id_c is not null) and*/ ac.id='$contactid'
+and deleted='0' group by ac.id";
+		$GLOBALS['log']->debug("##sql: $sql");
+		$result = $ac->db->query($sql);
+		$return = array();
+		$return['next_offset'] = -1;
+		$return['map'] = 1; 
+		$return['records'] = array();
+		
+		$row = $ac->db->fetchByAssoc($result);
+		$r = array();
+		$r['id'] = $row['id'];
+		$r['name'] = $row['first_name'].' '.$row['last_name'];
+		$r['billing_address_street'] = self::filt($row['primary_address_street']);
+		$r['billing_address_postalcode'] = self::filt($row['primary_address_postalcode']);
+		$r['billing_address_city'] = self::filt($row['primary_address_city']);
+		$r['billing_address_country'] = self::filt($row['primary_address_country']);
+		//$r['industry'] = self::filt($row['industry']);
+		$r['industry'] = 'Home';
+		$r['latitude_c'] = self::filt($row['latitude_c']);
+		$r['longitude_c'] = self::filt($row['longitude_c']);
+		$r['_module'] = 'Contacts';
+		array_push($return['records'], $r);
+		
 		return($return);
     }
      

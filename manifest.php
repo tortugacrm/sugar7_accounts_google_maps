@@ -39,7 +39,7 @@ $manifest = array (
   'name' => 'Google Maps Integration',
   'published_date' => '2015-05-26 10:30:00',
   'type' => 'module',
-  'version' => '1.2.2',
+  'version' => '1.2.3',
   'remove_tables' => 'prompt',
 );
 
