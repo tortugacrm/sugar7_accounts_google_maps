@@ -39,7 +39,7 @@ $manifest = array (
   'name' => 'Google Maps Integration',
   'published_date' => '2015-05-26 10:30:00',
   'type' => 'module',
-  'version' => '1.2.1',
+  'version' => '1.2.2',
   'remove_tables' => 'prompt',
 );
 
@@ -217,7 +217,7 @@ $installdefs = array (
 			 'order'   => 98,
 			 'description' => 'reset position',
 			 'file'   => 'custom/modules/Accounts/AccountsGmapsHook.php',
-			 'class'   => 'AddressChangeHook',
+			 'class'   => 'AccountAddressChangeHook',
 			 'function'  => 'resetPosition',
         ),
 
@@ -227,7 +227,7 @@ $installdefs = array (
 			 'order'   => 98,
 			 'description' => 'reset position',
 			 'file'   => 'custom/modules/Contacts/ContactsGmapsHook.php',
-			 'class'   => 'AddressChangeHook',
+			 'class'   => 'ContactAddressChangeHook',
 			 'function'  => 'resetPosition',
         ),
     ),

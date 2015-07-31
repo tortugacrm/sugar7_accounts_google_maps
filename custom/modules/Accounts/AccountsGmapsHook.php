@@ -18,7 +18,7 @@
  * Author: Olivier Nepomiachty SugarCRM
  */
   
-class AddressChangeHook
+class AccountAddressChangeHook
 {
      
     public function resetPosition(Account $bean, $event, $arguments)
