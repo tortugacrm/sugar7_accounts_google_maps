@@ -100,6 +100,21 @@ class AccountsGmapsApi extends SugarApi
                 'longHelp' => '',
             ),  
 
+             'GetAccountEndpoint' => array(
+                //request type
+                'reqType' => 'GET',
+                //endpoint path
+                'path' => array('AccountsGmaps', 'GetAccount'),
+                //endpoint variables
+                'pathVars' => array('', '', 'data'),
+                //method to call
+                'method' => 'GetAccount',
+                //short help string to be displayed in the help documentation
+                'shortHelp' => 'Gmaps: account record view, get 1 account',
+                //long help to be displayed in the help documentation
+                'longHelp' => '',
+            ),    
+
          );
     }
  
@@ -360,7 +375,7 @@ group by m.id";
     }
 
 	// #######################################
-	// ############### GetContact ###############
+	// ############### GetContact ############
 	// #######################################
     public function GetContact($api, $args)
     // Same behavior as GetMap1 but return a single account in a array
@@ -399,6 +414,46 @@ and deleted='0' group by ac.id";
 		
 		return($return);
     }
-     
+
+	// #######################################
+	// ############### GetAccount ############
+	// #######################################
+    public function GetAccount($api, $args)
+    // Same behavior as GetMap1 but return a single account in a array
+    {
+		if (!isset($args['accountid'])) { 
+			return '[]'; 
+			exit; 
+		}
+		$ac = new Account();
+		$accountid=$ac->db->quote($args['accountid']);
+		$sql = "select ac.id,ac.name, ac.billing_address_street, ac.billing_address_postalcode, ac.billing_address_city, ac.billing_address_country, ac.industry, acstm.latitude_c,acstm.longitude_c from accounts ac
+left join accounts_cstm acstm on ac.id = acstm.id_c
+where /*(acstm.id_c is not null) and*/ ac.id='$accountid'
+and deleted='0' group by ac.id";
+		$GLOBALS['log']->debug("##sql: $sql");
+		$result = $ac->db->query($sql);
+		$return = array();
+		$return['next_offset'] = -1;
+		$return['map'] = 1; 
+		$return['records'] = array();
+		
+		$row = $ac->db->fetchByAssoc($result);
+		$r = array();
+		$r['id'] = $row['id'];
+		$r['name'] = $row['name'];
+		$r['billing_address_street'] = self::filt($row['billing_address_street']);
+		$r['billing_address_postalcode'] = self::filt($row['billing_address_postalcode']);
+		$r['billing_address_city'] = self::filt($row['billing_address_city']);
+		$r['billing_address_country'] = self::filt($row['billing_address_country']);
+		$r['industry'] = self::filt($row['industry']);
+		$r['latitude_c'] = self::filt($row['latitude_c']);
+		$r['longitude_c'] = self::filt($row['longitude_c']);
+		$r['_module'] = 'Accounts';
+		array_push($return['records'], $r);
+		
+		return($return);
+    }
+
 }
 ?>
